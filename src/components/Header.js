@@ -26,6 +26,7 @@ import { selectEmail, setEmail } from '../state/emailState';
 import { useSelector, useDispatch } from 'react-redux';
 import FlatList from 'flatlist-react';
 import { Link } from 'react-router-dom';
+import {setisSignedIn,selectisSignedIn} from '../state/issign'
 
 export default function Header(){
 
@@ -79,11 +80,15 @@ export default function Header(){
                             </DropdownMenu>
                             </UncontrolledDropdown>
                         </Nav>
+                        <NavbarText className="text-center" style={{width:190}} className='text-white'>{email}</NavbarText>
                         {email ?
-                         <Link to = '/'><NavbarText  className='text-white' onClick = {()=>{firebase.auth().signOut() ;
+                         <Link to = '/'><NavbarText className="text-center"   className='text-white' onClick = {()=>{firebase.auth().signOut() ;
                             window.location.reload(false);
                             dispatch(setEmail(""));
-                            localStorage.setItem('email', "");}}>{email}</NavbarText></Link>
+                            dispatch(setisSignedIn(false))
+                            localStorage.setItem('email', "");
+                            localStorage.setItem('isSignedIn', false);
+                        }}> Logout </NavbarText></Link>
                          : 
                         <Link to = '/MyLoginScreen'> <NavbarText  className='text-white'>Login</NavbarText></Link>}
                         </Collapse>

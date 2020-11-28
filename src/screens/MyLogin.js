@@ -4,7 +4,7 @@ import Login from './Login'
 
 const MyLogin = (props) => {
   return (
-    <div style={{backgroundImage: 'url("https://addons-media.operacdn.com/media/CACHE/images/themes/55/30355/1.0-rev1/images/144b9554-ae6f-45fa-bfa4-5d656490c5a8/20995e7475260a89f94695b86b954fbb.jpg%22)'}}> 
+    <div style={{height:1080,backgroundImage: 'url("https://images.hdqwalls.com/download/vaporwave-zl-1920x1080.jpg")'}}> 
     {/* <Row>
         <Col>
             <Row></Row>
