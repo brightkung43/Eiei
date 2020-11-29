@@ -6,7 +6,7 @@ import Home from './screens/Home';
 import T_shirt from './screens/T_shirt';
 import Cart from './screens/Cart';
 import Inside from './screens/Inside';
-import MyLogin from './screens/MyLogin'
+import Login from './screens/Login'
 import SignUp from './screens/SignUp';
 import { createBrowserHistory } from 'history';
 import {
@@ -17,6 +17,7 @@ import {
   Switch,
 } from 'react-router-dom';
 import Header from './components/Header';
+
 
 function App() {
   
@@ -33,7 +34,7 @@ function App() {
           <Route exact path="/T_shirtScreen" component={T_shirt}/>
           <Route path="/CartScreen" component={Cart}/>
           <Route path="/InsideScreen" component={Inside}/>
-          <Route path="/MyLoginScreen" component={MyLogin}/>
+          <Route path="/LoginScreen" component={Login}/>
           <Route path="/SignInScreen" component={SignUp}/>
        
         </Switch>

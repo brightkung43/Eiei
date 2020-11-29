@@ -4,14 +4,14 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
 
 const config = {
-    apiKey: "AIzaSyBz9t_9rOv_FUIW-I6LRUZqHM75fBJ50g4",
-    authDomain: "seedsad-aaf83.firebaseapp.com",
-    databaseURL: "https://seedsad-aaf83.firebaseio.com",
-    projectId: "seedsad-aaf83",
-    storageBucket: "seedsad-aaf83.appspot.com",
-    messagingSenderId: "153377489056",
-    appId: "1:153377489056:web:1f9e8b5dfa2bacdd1609c5",
-    measurementId: "G-44W5PZDRJM"
+    apiKey: "AIzaSyBifxh25kS9Dk0URgQf4u5bvMPRCgE8CvQ",
+    authDomain: "seedzad-e1805.firebaseapp.com",
+    databaseURL: "https://seedzad-e1805.firebaseio.com",
+    projectId: "seedzad-e1805",
+    storageBucket: "seedzad-e1805.appspot.com",
+    messagingSenderId: "1021547031649",
+    appId: "1:1021547031649:web:96bd675d9a5a43e10ace20",
+    measurementId: "G-MNZT0M5LSW"
 };
 firebase.initializeApp(config);
 export default firebase;

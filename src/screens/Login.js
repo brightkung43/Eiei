@@ -31,6 +31,7 @@ import {setisSignedIn,selectisSignedIn} from '../state/issign'
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
+
  function Login  () {
     const email = useSelector(selectEmail);
     const isSignedIn = useSelector(selectisSignedIn);
@@ -48,8 +49,8 @@ import { useHistory } from 'react-router-dom';
       signInOptions: [
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-        firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-        firebase.auth.GithubAuthProvider.PROVIDER_ID,
+        // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+        // firebase.auth.GithubAuthProvider.PROVIDER_ID,
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
       ],
       callbacks: {
@@ -121,8 +122,9 @@ import { useHistory } from 'react-router-dom';
         
    if(!isSignedIn ) {return (
 
-            
-          <div  className="container" style={{backgroundColor:'#CAB9E1',borderRightColor:'black',borderRightWidth:3,padding: 50,width:350,borderRadius:30}} /*style={{backgroundImage: 'url("https://images.hdqwalls.com/download/vaporwave-zl-1920x1080.jpg")'}}*/>
+          <div style={{height:900,backgroundImage: 'url("https://images.hdqwalls.com/download/vaporwave-zl-1920x1080.jpg")'}} >
+          <div style={{height:100}}></div>
+          <div  className="container" style={{marginTop:100, backgroundColor:'#CAB9E1',borderRightColor:'black',borderRightWidth:3,padding: 50,width:350,borderRadius:30,}} /*style={{backgroundImage: 'url("https://images.hdqwalls.com/download/vaporwave-zl-1920x1080.jpg")'}}*/>
             <h1>Login</h1> 
             
   
@@ -136,10 +138,10 @@ import { useHistory } from 'react-router-dom';
       // We will display Google , Facebook , Etc as auth providers.
       signInOptions: [
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+        // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
         // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
         // firebase.auth.GithubAuthProvider.PROVIDER_ID,
-        // firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        firebase.auth.EmailAuthProvider.PROVIDER_ID,
       ],
       callbacks: {
         // Avoid redirects after sign-in.
@@ -149,14 +151,13 @@ import { useHistory } from 'react-router-dom';
     }} firebaseAuth={firebase.auth()}/>
           </div>
        
-        //this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
-          //  (user) => {setisSignedIn(!!user)   }
+       
         
            
         
       
       
-      
+      </div>
    )}
         else{
            
@@ -169,7 +170,8 @@ import { useHistory } from 'react-router-dom';
             return(
 
         <div className="container" style={{backgroundColor:'white',width:500}}>
-          <h1>FirebaseUI-React</h1>
+          <div style={{backgroundColor:'white',height:300,marginTop:250}}>
+             <h1>FirebaseUI-React</h1>
           <h1> with Firebase Authentication</h1>
          
           <p>Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</p>
@@ -182,6 +184,8 @@ import { useHistory } from 'react-router-dom';
                 
                 }}>Sign-out</button>
             </div> */}
+          </div>
+         
          
         </div>
      )

@@ -24,7 +24,7 @@ import Slidebar from '../components/Slidebar';
 import { Link } from 'react-router-dom';
 import ShoppingList from '../components/ShoppingList';
 import Header from '../components/Header';
-import firebase from '../firebase/firebase'
+import firebase from '../firebase/firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { selectEmail, setEmail } from '../state/emailState';
 import { useSelector, useDispatch } from 'react-redux';
@@ -32,7 +32,16 @@ import { useSelector, useDispatch } from 'react-redux';
 function Home(props){
     const email = useSelector(selectEmail);
     const dispatch = useDispatch();
+
+    const [image,setImage] = useState("");
+    const [name,setName] = useState("");
+    const [price,setPrice] = useState(0);
+
+   
+
+    
      
+
     return (
       
             <div >

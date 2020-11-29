@@ -90,7 +90,7 @@ export default function Header(){
                             localStorage.setItem('isSignedIn', false);
                         }}> Logout </NavbarText></Link>
                          : 
-                        <Link to = '/MyLoginScreen'> <NavbarText  className='text-white'>Login</NavbarText></Link>}
+                        <Link to = '/LoginScreen'> <NavbarText  className='text-white'>Login</NavbarText></Link>}
                         </Collapse>
                         <Link to = '/CartScreen'><img style={{height:30,width:130}} src="https://www.flaticon.com/svg/static/icons/svg/2121/2121815.svg"  /></Link>
                     </Navbar>
