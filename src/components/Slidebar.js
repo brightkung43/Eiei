@@ -9,19 +9,19 @@ import {
 
 const items = [
   {
-    src: 'https://pbs.twimg.com/media/D5B28wKW0AUMWDJ.png',
-    altText: 'Slide 1',
-    caption: 'Slide 1'
+    src: 'https://scontent.fbkk11-1.fna.fbcdn.net/v/t1.0-9/127155217_1521957791348588_7500811376930087032_o.jpg?_nc_cat=104&ccb=2&_nc_sid=730e14&_nc_eui2=AeEG4Uu5Gg29eOpKcKU2gjKMUjbOKVZcbJ9SNs4pVlxsn4thFTghIpBFSigSNYdlnihfH63Vj4HK8hcI1WTQIU2a&_nc_ohc=UFnzUtzV3NQAX_IgNB2&_nc_ht=scontent.fbkk11-1.fna&oh=d7391c0ddb45429b6e2050491562d916&oe=5FE9DE8D',
+    // altText: 'Slide 1',
+    // caption: 'Slide 1'
   },
   {
-    src: 'https://pm1.narvii.com/6922/cefa1ac3d4452959fe674860eff8b13eb93b322dr1-900-400v2_uhq.jpg',
-    altText: 'Slide 2',
-    caption: 'Slide 2'
+    src: 'https://scontent.fbkk11-1.fna.fbcdn.net/v/t1.0-9/127872636_1521957851348582_3998614994345460956_o.jpg?_nc_cat=104&ccb=2&_nc_sid=730e14&_nc_eui2=AeHHrILEfNhxkpKmx9m5E8ymnz27XZI5pIifPbtdkjmkiJuwWHnELbkSWRJ9gUQADEWbHG6J8xaZChURxuqbkv3R&_nc_ohc=z0VXwuIk_XwAX8__e9I&_nc_ht=scontent.fbkk11-1.fna&oh=52d7802bc66fd2b8f1893cbf19494f42&oe=5FE73179',
+    // altText: 'Slide 2',
+    // caption: 'Slide 2'
   },
   {
-    src: 'https://i.imgur.com/c8Ceyu8.png',
-    altText: 'Slide 3',
-    caption: 'Slide 3'
+    src: 'https://scontent.fbkk11-1.fna.fbcdn.net/v/t1.0-9/127246983_1521957814681919_4402782845890355023_o.jpg?_nc_cat=108&ccb=2&_nc_sid=730e14&_nc_eui2=AeHrKQdorSkKuWvaZkqdBllbrHdoHFMaCbusd2gcUxoJu2h-YRrJdR_FpuFpaBi87PhVUhIYiaGtESgOamb4WuT3&_nc_ohc=4BJtAvQEjskAX97lqiN&_nc_ht=scontent.fbkk11-1.fna&oh=97b642afcb2c497dae10f97e6d84072a&oe=5FE6F53A',
+    // altText: 'Slide 3',
+    // caption: 'Slide 3'
   }
 ];
 

@@ -15,66 +15,54 @@ import { makeStyles } from '@material-ui/core/styles';
 import Header from '../components/Header';
 // import { Link } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
+import firebase from '../firebase/firebase';
+import { selectEmail, setEmail } from '../state/emailState';
+import { useSelector, useDispatch } from 'react-redux';
 
-export default class Cart extends Component{
-    constructor(props){
-        super(props);
-        
-            this.state={
-                cartNum:0,
-                listitems: [
-                    {image: 'https://assets.adidas.com/images/w_280,h_280,f_auto,q_auto:sensitive/69721f2e7c934d909168a80e00818569_9366/M20324_720_M20324_01_standard.jpg.jpg', name: 'เสื้อหลุย', price: 199,piece : 1},
-                    {image: 'https://assets.adidas.com/images/w_280,h_280,f_auto,q_auto:sensitive/c40bf1d0d5124bcd8ea8abd4011f8275_9366/FY8852_540_FY8852_01_standard.jpg.jpg', name: 'เสื้อหลุย', price: 199,piece : 2},
-                    {image: 'https://scontent.fbkk11-1.fna.fbcdn.net/v/t1.0-9/126329327_1515994261944941_4003126549141028566_n.jpg?_nc_cat=103&ccb=2&_nc_sid=730e14&_nc_eui2=AeGDo8GxGpO0Rx-ahF6Eh6hQbVHmPNkl1fdtUeY82SXV9699HeUKP97cfznpLFiWLJI0mt_86s9vY1n6tCp0wEID&_nc_ohc=WduYugqWMOcAX-MDeB5&_nc_ht=scontent.fbkk11-1.fna&oh=25f33894ba57440016c85957d1b43dff&oe=5FE07583', name: 'เสื้อหลุย', price: 199,piece : 1},
-                    {image: 'https://scontent.fbkk11-1.fna.fbcdn.net/v/t1.0-9/126329327_1515994261944941_4003126549141028566_n.jpg?_nc_cat=103&ccb=2&_nc_sid=730e14&_nc_eui2=AeGDo8GxGpO0Rx-ahF6Eh6hQbVHmPNkl1fdtUeY82SXV9699HeUKP97cfznpLFiWLJI0mt_86s9vY1n6tCp0wEID&_nc_ohc=WduYugqWMOcAX-MDeB5&_nc_ht=scontent.fbkk11-1.fna&oh=25f33894ba57440016c85957d1b43dff&oe=5FE07583', name: 'เสื้อหลุย', price: 199,piece : 1},
-                    {image: 'https://scontent.fbkk11-1.fna.fbcdn.net/v/t1.0-9/126329327_1515994261944941_4003126549141028566_n.jpg?_nc_cat=103&ccb=2&_nc_sid=730e14&_nc_eui2=AeGDo8GxGpO0Rx-ahF6Eh6hQbVHmPNkl1fdtUeY82SXV9699HeUKP97cfznpLFiWLJI0mt_86s9vY1n6tCp0wEID&_nc_ohc=WduYugqWMOcAX-MDeB5&_nc_ht=scontent.fbkk11-1.fna&oh=25f33894ba57440016c85957d1b43dff&oe=5FE07583', name: 'เสื้อดำ', price: 399,piece : 1},
-                    {image: 'https://scontent.fbkk11-1.fna.fbcdn.net/v/t1.0-9/126329327_1515994261944941_4003126549141028566_n.jpg?_nc_cat=103&ccb=2&_nc_sid=730e14&_nc_eui2=AeGDo8GxGpO0Rx-ahF6Eh6hQbVHmPNkl1fdtUeY82SXV9699HeUKP97cfznpLFiWLJI0mt_86s9vY1n6tCp0wEID&_nc_ohc=WduYugqWMOcAX-MDeB5&_nc_ht=scontent.fbkk11-1.fna&oh=25f33894ba57440016c85957d1b43dff&oe=5FE07583', name: 'Correia', price:499,piece : 1},
-     
-    
+export default function Cart(){
+         
+       const [i,seti] = useState(0) 
+       const [sum,setsum] = useState(0) 
+       const [total,settotal] = useState(0) 
+       const [itemlist,setitemlist] = useState([])
+       const [piece,setpiece] = useState(0)
+       const [price,setprice] = useState(0)
+       const [name,setname] = useState("")
+       const [sent,setsent] = useState(100)
+       let email = useSelector(selectEmail);
+       const [round,setround] = useState(0)
+       email = localStorage.getItem('email')
+        if(round== 0){
+            setround(1)  
+      firebase.firestore().collection("Shopping").where("email","==",email).get()
+                            .then(function(querySnapshot){
+                            let a = [];
+                            let num = 0; 
+                            let nums = 0;
+                            let all = 0;
+                            querySnapshot.forEach(function(doc){
+                                a.push(doc.data())
+                                num+= (doc.data().priece * doc.data().piece)
+                                nums += doc.data().piece
+                                
+                                seti(i+1)
+                                setpiece(nums)
+                               
+                                setsum(num)
+                                setitemlist(a)
+
+                            }
+                            )
+                            
+                                }
+
+                            )
+                
                     
-                ],
-                i :0,
-                sum:0,
-                sent:100,
-                total:0,
-            }
-            
-            {this.state.listitems.map(listitem =>{
-                this.setState({i:this.state.i+=listitem.piece})
-                this.setState({sum :this.state.sum+= (listitem.price*listitem.piece)})          
-        }   
-       )
-    }
-    if(this.state.sum > 1000){
-        this.setState({sent :this.state.sent-=100}) 
-    }
-    
-    
-    this.setState({total :this.state.total += (this.state.sum + this.state.sent) }) 
-    
-    }
-    componentDidMount(){
-        
-    }
-    componentDidUpdate(){
-        {this.state.listitems.map(listitem =>{
-            this.setState({i:this.state.i+1})
-            this.setState({sum :this.state.sum+= listitem.price}) 
-
-        
-    }
-    
-
-    )
-    
-
-
-
-}
-    }
-    
-    render(){
-        
+                
+                          
+        }
+   
         return(
             <div>
                 <div>
@@ -87,11 +75,11 @@ export default class Cart extends Component{
             <Col md = '2'></Col>
             <Col md = '5' >
                 <div  className="text-left " style={{margin:20}}>
-                  <span  style={{fontSize:28,fontWeight:'bold'}}>ตะกร้าของคุณ</span> &nbsp;&nbsp;<span style={{fontSize:20,}}>{this.state.cartNum}  รายการ</span>  
+                  <span  style={{fontSize:28,fontWeight:'bold'}}>ตะกร้าของคุณ</span> &nbsp;&nbsp;<span style={{fontSize:20,}}>{i}  รายการ</span>  
                 </div>
 
                 <ListGroup style={{}}>
-                    {this.state.listitems.map(listitem => (
+                    {itemlist.map(listitem => (
                      <Col  className = "border-top border-lightgray"style={{borderColor:'red' }}>  
                         <Col className="text-left " style={{height:152,borderWidth:10,borderColor:'secondary',marginTop:20}}>     
                             <Row >
@@ -102,20 +90,46 @@ export default class Cart extends Component{
                                 <Col sm="5">
                                     
                                     <h1  style={{marginLeft:-20,fontSize:18,fontWeight:'bold',}}>{listitem.name}</h1> 
-                                    <Link style={{borderWidth:false}} component="button" variant="body2" onClick={() => {console.info("I'm a button.") }}>ลบ</Link>
+
+                                    <Link style={{borderWidth:false}} component="button" variant="body2" onClick={() => {
+                                         firebase.firestore().collection("Shopping").where("email","==",email).get()
+                                         .then(function(querySnapshot){
+                                           let a = false;
+                                           querySnapshot.forEach(function(doc){
+                                             let c = doc.data().idCloth
+                                             console.log(c,listitem.idCloth)
+                                             if(c == listitem.idCloth)
+                                             {
+                                               a = true;
+                                               firebase.firestore().collection("Shopping").doc(doc.id).delete()
+                                                
+                                             }
+                                           })
+                                                   
+                   
+                                         })
+                                         .catch(function(error){
+                                           console.log(error);
+                                         });
+                                         setTimeout(function() {
+                                            window.location.reload(false);
+                           
+                                       }, 500);
+                                        
+                                     }}>ลบ</Link>
                                     
                                 </Col>
                                   
                                 <Col className="text-right">
                 &nbsp;&nbsp;&nbsp;  <div className="text-center">
-                                    <p caret style={{backgroundColor:'lightgray',width:60}}>
-                                    {listitem.piece} &nbsp;
+                                    <p caret style={{backgroundColor:'lightgray',marginTop:-20, width:60}}>
+                                     {listitem.piece} &nbsp;
                                     </p>
                                     </div>
                                 </Col>
                                 <Col >
                                 <div >
-                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;฿ {listitem.price}
+                                    &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;฿ {listitem.priece}
                                     </div>
                                 </Col>
                                 
@@ -136,24 +150,21 @@ export default class Cart extends Component{
                       
                    
                 </ListGroup> 
-                <div  className="text-left " style={{marginLeft:10,marginTop:5}}>
-                     <Button style={{height:55,width:170,backgroundColor:'black'}} >ชำระเงิน</Button>
-             
-   
-                </div>  
+               
             </Col>
                     
           <div  className="text-left " style={{height:330,width:350,marginLeft:10,marginTop:75,padding:10,backgroundColor:'#ebebeb',justifyItems:'top',alignItems:'top'}}>
             <Button style={{backgroundColor:'black',height:50,width:"100%"}}>ชำระเงิน</Button>
-            <p style={{fontSize:20,fontWeight:'bold',marginTop:10}}>สรุปคำสั่งซื้อ</p>
+            <p style={{fontSize:20,fontWeight:'bold',marginTop:10}}>ค่าสินค้าทั้งหมด</p>
             
         <div  style={{height:200,width:330,backgroundColor:'white'}}>
                 <div style={{marginLeft:10}}>
                     {}
-                    <p  >{this.state.i} ชิ้น</p>
-    <p class="conclude-product" style={{}}>รวมสินค้าทั้งหมด &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {this.state.sum}฿</p>
-                <p class="conclude-product" style={{}}>การจัดส่ง &nbsp;&nbsp; {this.state.sent }</p>
-                    <p class="conclude-product" style={{fontWeight:'bold'}}>รวม &nbsp;&nbsp;&nbsp;{this.state.total} </p>
+                    <p  >{piece} ชิ้น</p>
+    <p class="conclude-product" style={{}}>รวมสินค้าทั้งหมด &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {sum} ฿</p>
+    
+                <p class="conclude-product" style={{}}>การจัดส่ง &nbsp;&nbsp;{ sum == 0 ? 0:sent}  ฿</p>
+                    <p class="conclude-product" style={{fontWeight:'bold'}}>รวม  &nbsp;&nbsp;&nbsp;{sum + (sum == 0 ? 0:sent)} ฿</p>
                 </div>
             </div>
           </div>
@@ -170,5 +181,5 @@ export default class Cart extends Component{
             
         );
     }
-}
+
 

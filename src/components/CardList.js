@@ -27,7 +27,27 @@ export default class CardList extends Component {
                 
             ]
     }
+    const currencies = [
+        {
+          value: 'S',
+          label: 'S',
+        },
+        {
+          value: 'M',
+          label: 'M',
+        },
+        {
+          value: 'L',
+          label: 'L',
+        },
+        {
+          value: 'XL',
+          label: 'XL',
+        },
+      ];
+
 }
+    
 
     render(){
         return (

@@ -8,6 +8,8 @@ import Cart from './screens/Cart';
 import Inside from './screens/Inside';
 import Login from './screens/Login'
 import SignUp from './screens/SignUp';
+import WomenList from './components/WomenList';
+import MenList from './components/MenList';
 import { createBrowserHistory } from 'history';
 import {
   BrowserRouter,
@@ -36,7 +38,9 @@ function App() {
           <Route path="/InsideScreen" component={Inside}/>
           <Route path="/LoginScreen" component={Login}/>
           <Route path="/SignInScreen" component={SignUp}/>
-       
+          <Route path="/WomenListScreen" component={WomenList}/>
+          <Route path="/MenListScreen" component={MenList}/>
+        
         </Switch>
         </div>
         </BrowserRouter>

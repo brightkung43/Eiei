@@ -9,27 +9,16 @@ import {
     CardTitle, CardSubtitle, Button, Container, Row,ListGroup,
     Modal, ModalHeader, ModalBody, ModalFooter, Col 
   } from 'reactstrap';
-import { emailState } from "../state/emailState";
 
-import { selectEmail, setEmail } from '../state/emailState';
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+
 
 export default function ShoppingList(props){
   const [itemList,setitemList] = useState([]);
   const [num,setnum] = useState(0);
-  const [imagemodal,setImageModal] = useState("");
-  const [idCloth,setidCloth] = useState("")
-  const [priece,setpriece] = useState(0)
-  const [piece,setpiece] = useState(0)
-  const [input,setinput] = useState(0)
-  const [name,setname] = useState(0)
-  const [imga,setimga] = useState("")
-  const history = useHistory();
     const classes = useStyles();
     const  bestseller = ()=>{
       if(num == 0){
-      const userRef = firebase.firestore().collection("Bestseller").get().then(function(querySnapshot) {
+      const userRef = firebase.firestore().collection("Cloth").where("Collection","==","Crop").get().then(function(querySnapshot) {
         let a = [] 
         querySnapshot.forEach(function(doc) {
               // doc.data() is never undefined for query doc snapshots
@@ -48,7 +37,13 @@ export default function ShoppingList(props){
           console.log("Error getting documents: ", error);
       });
       }
-   
+      // .then(function(docRef){
+      //     docRef.forEach(function(doc){
+      //         setitemList([...itemList,doc])
+      //         console.log(doc)
+      //     })
+      // })
+          
         
   }
     bestseller()
@@ -61,19 +56,29 @@ export default function ShoppingList(props){
       const [modal, setModal] = useState(false);
       const toggle = () => setModal(!modal);
 
-   
-      let email = useSelector(selectEmail);
-   /* if(emails==''){
-        if(localStorage.getItem('email') != '')
-        email
-    }*/
-    const rememberMe = localStorage.getItem('email') ;
-    const dispatch = useDispatch();
-    
-    if(email != rememberMe){
-        email = localStorage.getItem('email')
-    }
-    //
+      const currencies = [
+        {
+          value: 'S',
+          label: 'S',
+        },
+        {
+          value: 'M',
+          label: 'M',
+        },
+        {
+          value: 'L',
+          label: 'L',
+        },
+        {
+          value: 'XL',
+          label: 'XL',
+        },
+      ];
+
+      const [currency, setCurrency] = React.useState('EUR');
+      const handleChange = (event) => {
+        setCurrency(event.target.value);
+      };
   
         return (
           
@@ -81,14 +86,7 @@ export default function ShoppingList(props){
         <ListGroup style={{height:500,width:"80%",marginLeft:145}}>
             <Row sm="5" style={{alignItems:'center'}} >
                         { num==2 ?  itemList.map(listitem => (
-                <ButtonBase onClick={()=>{toggle()
-                    setImageModal(listitem.image)   
-                    setidCloth(listitem.idCloth)   
-                    setpiece(1) 
-                    setpriece(listitem.price)
-                    setname(listitem.name)
-                    setimga(listitem.image)
-                }}
+                <ButtonBase onClick={toggle}
                 focusRipple
                 key={""}
                 className={classes.image}
@@ -110,22 +108,35 @@ export default function ShoppingList(props){
                     <ModalBody>
                         <Row>
                             <Col>
-                                <img  style={{height:250,width:224,marginTop:10}} src={imagemodal} alt="Card image cap" /> 
+                                <img  style={{height:250,width:224,marginTop:10}} src={listitem.image} alt="Card image cap" /> 
                             </Col>
                             <Col>
 
                                 <p style={{fontSize:25}}>{listitem.name}</p>
                                 <p>{listitem.price}</p>
-                               
-                                   
+                                <TextField
+                                id="filled-select-currency"
+                                select
+                                label="Select Size"
+                                value={currency}
+                                onChange={handleChange}
+                                helperText="Please select your size"
+                                variant="filled"
+                                >
+                                {currencies.map((option) => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                    {option.label}
+                                    </MenuItem>
+                                ))}
+                                </TextField>
+                                    <br/>
                                 <Row>
                                     <Col sm="3">
                                         <p>จำนวน</p>
                                     </Col>
                                     
                                     <Col>
-                                        <TextField type="number" defaultValue={0} style={{width:40}}  onChange={(txt)=>setinput(parseInt( txt.target.value,10))} />
-                                        {console.log(input)}
+                                        <TextField style={{width:40}}  />
                                     </Col>
                                     
                                 </Row>    
@@ -137,49 +148,7 @@ export default function ShoppingList(props){
                         
                     </ModalBody>
                     <ModalFooter>
-                    <Button color="primary" onClick={()=>{toggle()
-                      firebase.firestore().collection("Shopping").where("email","==",email).get()
-                      .then(function(querySnapshot){
-                        let a = false;
-                        querySnapshot.forEach(function(doc){
-                          let c = doc.data().idCloth
-                          console.log(c,idCloth)
-                          if(c == idCloth)
-                          {
-                            a = true;
-                            firebase.firestore().collection("Shopping").doc(doc.id).update({
-                              piece:doc.data().piece += input
-                            })
-                          }
-                        })
-                          if(!a){
-                            console.log(idCloth,email,priece,priece)
-                            firebase.firestore().collection("Shopping").add({
-                                idCloth:idCloth,
-                                email:email,
-                                priece:priece,
-                                piece:input,
-                                name:name,
-                                image:imga
-
-
-                              
-                            })
-
-                          }
-                          
-
-                      })
-                      .catch(function(error){
-                        console.log(error);
-                      });
-                      setTimeout(function() {
-                        history.push('/CartScreen');
-        
-                    }, 1000);
-                    }
-                    
-                    }>เพิ่มในตะกร้า</Button>{' '}
+                    <Button color="primary" onClick={toggle}>เพิ่มในตะกร้า</Button>{' '}
                     </ModalFooter>
                     </Modal>
                 </Card>

@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
+import Header from '../components/Header';
 import firebase from '../firebase/firebase';
 import {
     Card, CardImg, CardText, CardBody,
@@ -15,7 +16,7 @@ import { selectEmail, setEmail } from '../state/emailState';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-export default function ShoppingList(props){
+export default function MenList(props){
   const [itemList,setitemList] = useState([]);
   const [num,setnum] = useState(0);
   const [imagemodal,setImageModal] = useState("");
@@ -27,9 +28,9 @@ export default function ShoppingList(props){
   const [imga,setimga] = useState("")
   const history = useHistory();
     const classes = useStyles();
-    const  bestseller = ()=>{
+    const  men = ()=>{
       if(num == 0){
-      const userRef = firebase.firestore().collection("Bestseller").get().then(function(querySnapshot) {
+      const userRef = firebase.firestore().collection("Cloth").where("Collection","==","Men").get().then(function(querySnapshot) {
         let a = [] 
         querySnapshot.forEach(function(doc) {
               // doc.data() is never undefined for query doc snapshots
@@ -51,7 +52,7 @@ export default function ShoppingList(props){
    
         
   }
-    bestseller()
+    men()
      
     const {
         buttonLabel,
@@ -76,8 +77,12 @@ export default function ShoppingList(props){
     //
   
         return (
-          
+           <div >
+                   <Header />
+                   
+               
             <div className={classes.root}>
+                 
         <ListGroup style={{height:500,width:"80%",marginLeft:145}}>
             <Row sm="5" style={{alignItems:'center'}} >
                         { num==2 ?  itemList.map(listitem => (
@@ -187,6 +192,7 @@ export default function ShoppingList(props){
         </ButtonBase>)):null}
      </Row>
      </ListGroup>
+    </div>
     </div>
    
   );
